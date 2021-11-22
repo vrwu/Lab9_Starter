@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "4e3e9abb7bfa441dae99265eebf3c1a6"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+</script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,139 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    class MyCustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "MyCustomError";
+      }
+    }
+    // console.log
+    errorBtns[0].addEventListener("click", function() {
+      let firstNumber = document.querySelector('#first-num').value;
+      let secondNumber = document.querySelector('#second-num').value;
+      let operator = document.querySelector('#operator').value;
+      console.log("First Number: " + firstNumber + " Operator: " + operator + " Second Number: " + secondNumber);
+    });
+
+    // console.error
+    errorBtns[1].addEventListener("click", function() {
+      let firstNumber = document.querySelector('#first-num').value;
+      let secondNumber = document.querySelector('#second-num').value;
+      let operator = document.querySelector('#operator').value;
+      console.error("First Number: " + firstNumber + " Operator: " + operator + " Second Number: " + secondNumber);
+    });
+
+    // console.count
+    errorBtns[2].addEventListener("click", function() {
+      let firstNumber = document.querySelector('#first-num').value;
+      console.count(firstNumber);
+    });
+
+    // console.warn
+    errorBtns[3].addEventListener("click", function() {
+      let firstNumber = document.querySelector('#first-num').value;
+      console.warn(firstNumber);
+    });
+
+    // console.assert
+    errorBtns[3].addEventListener("click", function() {
+      let firstNumber = document.querySelector('#first-num').value;
+      let secondNumber = document.querySelector('#second-num').value;
+      console.assert(firstNumber != "" && secondNumber != "", "First Number and Second Number are non-null");
+    });
+
+    // console.clear
+    errorBtns[5].addEventListener("click", function() {
+      console.clear();
+    });
+    
+    // console.dir
+    errorBtns[6].addEventListener("click", function() {
+      console.dir(document.head);
+    });
+
+    // console.dirxml
+    errorBtns[7].addEventListener("click", function() {
+      console.dir(document);
+    });
+
+    // console.group
+    errorBtns[8].addEventListener("click", function() {
+      console.group("test");
+    });
+
+    // console.groupEnd
+    errorBtns[9].addEventListener("click", function() {
+      console.groupEnd("test");
+    });
+
+    // console.table
+    errorBtns[10].addEventListener("click", function() {
+      console.table([
+        {
+          first: 'john',
+          last: 'doe',
+          birthday: '01012000',
+        },
+        {
+          first: 'jane',
+          last: 'doe',
+          birthday: '01022000',
+        },
+      ]);
+    });
+
+    // console.time
+    errorBtns[11].addEventListener("click", function() {
+      console.time();
+    });
+
+    // console.timeEnd
+    errorBtns[12].addEventListener("click", function() {
+      console.timeEnd();
+    });
+
+    // console.trace
+    errorBtns[13].addEventListener('click', function() {
+      console.trace();
+    });
+
+    // console.trigger
+    errorBtns[14].addEventListener('click', function() {
+      console.log(testFunc(5));
+      testErrorMessage();
+      console.log(testFunc(x));
+    });
+
+    function testError() {
+      throw new MyCustomError("My Custom Error!!");
+    }
+    
+    function testFunc(x) {
+      try {
+        return x - 5;
+      } catch (error) {
+        throw Error;
+        console.log(error);
+        console.log("Throwing error");
+      } finally {
+        console.log("Finally, error");
+      }
+    }
+
+    function testErrorMessage() {
+      try {
+        testError();
+      } catch (error) {
+        console.log(error);
+        alert(error.message);
+        alert(error.name);
+        TrackJS.track('Testing TrackJS!');
+      }
+    }
+                        
+
   </script>
 </body>
 
